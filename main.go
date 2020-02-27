@@ -59,7 +59,7 @@ func run(stdin io.Reader, stdout, stderr io.Writer, args []string) error {
 	}
 
 	if versionFlag {
-		fmt.Fprintf(stdout, "%s v%s", CommandName, Version)
+		fmt.Fprintf(stdout, "%s %s (rev:%s)\n", CommandName, Version, Revision)
 		return nil
 	}
 

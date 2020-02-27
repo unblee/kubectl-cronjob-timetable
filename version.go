@@ -1,3 +1,7 @@
 package main
 
-const Version = "0.0.0"
+// These variables are set in build step
+var (
+	Version  = "VERSION"
+	Revision = "REVISION"
+)
