@@ -1,0 +1,32 @@
+project_name: kubectl-cronjob-timetable
+env:
+  - GO111MODULE=on
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - main: .
+    binary: kubectl-cronjob-timetable
+    ldflags:
+      - -s -w
+      - -X main.Version={{.Version}}
+      - -X main.Revision={{.ShortCommit}}
+    env:
+      - CGO_ENABLED=0
+archives:
+  - name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+release:
+  prerelease: auto
+
+# Homebrew
+brews:
+  - description: "Display a timetable of CronJob's schedule"
+    github:
+      owner: unblee
+      name: homebrew-tap
+    homepage: "https://github.com/unblee/kubectl-cronjob-timetable"
+    install: |
+      bin.install "kubectl-cronjob-timetable"
